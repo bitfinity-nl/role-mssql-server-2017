@@ -1,0 +1,27 @@
+---
+# Title: app-mssql-server-2017
+# Author: Bitfinity-NL
+# File: defaults/main.yml
+#
+# Description:
+#   Ansible role for deploying the SQL Server Management Studio (SSMS)
+#
+# Howto:
+#  0. Download the files from the Microsoft site:
+#     - https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017
+#  1. Zip all files in 1 file.
+#  2. Upload the file to the web/download server.
+#  3. Edit defaults/main.yml to your needs.
+#  4. Add the role to your playbook.
+
+pkg_state        : 'present'
+pkg_name         : 'sql-srv-2017'
+pkg_arch         : '64bit'
+pkg_repo_local   : 'c:\ProgramData\ansible\cached\{{ pkg_name }}'
+pkg_repo_remote  : 'http://{{ def_repo_ip }}/resources/microsoft/evaluation/sqlserver/2017/ms-sql-server2017.zip'
+pkg_product_id   : 'Microsoft SQL Server SQL2017'
+pkg_installer    : '{{ pkg_repo_local }}\setup.exe'
+pkg_arguments    : '/ConfigurationFile={{ pkg_repo_local }}/ConfigurationFile.ini'
+
+
+
